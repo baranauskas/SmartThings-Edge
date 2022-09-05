@@ -6,8 +6,6 @@ components:
     capabilities:
     - id: presenceSensor
       version: 1
-    - id: contactSensor
-      version: 1
     - id: motionSensor
       version: 1
     - id: accelerationSensor
@@ -21,44 +19,44 @@ components:
 
   - id: North
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: West
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: South
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: East
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
 
   - id: EarlyMorning
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: LateMorning
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: EarlyAfternoon
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: LateAfternoon
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: EarlyNight
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
   - id: LateNight
     capabilities:
-    - id: contactSensor
+    - id: presenceSensor
       version: 1
 
 preferences:

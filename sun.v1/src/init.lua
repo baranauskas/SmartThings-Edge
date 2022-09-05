@@ -1,11 +1,8 @@
 -- require st provided libraries
 local capabilities = require('st.capabilities')
 local Driver = require('st.driver')
---local utils = require('st.utils')
---local log = require('log')
 -----------------------------------------------------------
 -- require custom handlers from driver package
---local config = require("config")
 local command_handlers = require("command_handlers")
 local discovery = require("discovery")
 local lifecycle_handlers = require("lifecycle_handlers")

@@ -2,8 +2,6 @@
 -- Jose Augusto Baranauskas
 -- 2022 08 30 v1
 -----------------------------------------------------------
-local log = require('log')
-
 local config = {}
 -----------------------------------------------------------
 config.schedule = {}
@@ -30,8 +28,6 @@ function config.date.remainingSecondsToMidnight( osTime, secondsToAdd, timezone 
   local localTime = osTime + timezone * 60 * 60
   local now = os.date("!*t", localTime )
   local remainingSeconds = (now.hour * -3600 - now.min * 60 - now.sec) % 86400
-  log.debug( "Local time is " .. config.date.toString( osTime, timezone ) )
-  log.debug( "remainingSecondsToMidnight = " .. remainingSeconds )
   return remainingSeconds + secondsToAdd
 end
 

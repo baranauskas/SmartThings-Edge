@@ -3,8 +3,6 @@
 -- 2022 08 30 v1
 -----------------------------------------------------------
 local capabilities = require('st.capabilities')
---local Driver = require('st.driver')
---local utils = require('st.utils')
 local log = require('log')
 
 local config = require("config")
@@ -14,46 +12,18 @@ local lifecycle_handlers = {}
 -----------------------------------------------------------
 -- this is called once a device is added by the cloud and synchronized down to the hub
 function lifecycle_handlers.added(driver, device)
-  -- set a default or queried state for each capability attribute
   log.info( string.format("adding new device: %s", device.label) )
 end
 -----------------------------------------------------------
 -- this is called both when a device is added (but after `added`) and after a hub reboots.
 function lifecycle_handlers.init(driver, device)
   log.info( string.format("initializing device: %s", device.label) )
---  local msg = ""
---  for k,v in pairs( device.preferences ) do
---     msg = msg .. string.format("preference: %s = %s\n", k, v)
---  end
---  log.info(msg)
 
   device:emit_event( capabilities.presenceSensor.presence.not_present() )
---  device:emit_event( capabilities.contactSensor.contact.closed() )
---  device:emit_event( capabilities.motionSensor.motion.inactive() )
---  device:emit_event( capabilities.accelerationSensor.acceleration.inactive() )
   device:emit_event( capabilities.infraredLevel.infraredLevel( 50 ) )
---  device:emit_event( capabilities.airQualitySensor.airQuality( 5 ) )
---  device:emit_event( capabilities.energyMeter.energy( 50.12 ) )
---  device:emit_event( capabilities.illuminanceMeasurement.illuminance( 100.34 ) )
-
---  device.profile.compone--nts.main.infraredLevel.setInfraredLevel( 80 )
-
---  device:emit_component_event(device.profile.components.main, capabilities.switch.switch.on())
-------  for k,v in ipairs( config.sensorNames ) do
---    log.info("===> config " .. v)
-------    device.profile.components[v]:emit_event( capabilities.contactSensor.contact.closed() )
-------  end
---  if location then
---    local lat, lng  = "vazio", "vazio"
---    if location.latitude then lat = localtion.latitude end
---    if location.longitude then lng = localtion.longitude end
---    log.info("======> location lat=" .. lat .. " lng=" .. lng )
---  end
 
   lifecycle_handlers.reschedule(driver, device)
   command_handlers.refresh(driver, device)
-
-  -- mark device as online so it can be controlled from the app
   device:online()
 end
 -----------------------------------------------------------

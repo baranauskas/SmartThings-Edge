@@ -16,18 +16,18 @@ This device handler implements solar position sensors as well as
 time intervals over day and night events.
 
   The parent sensors are:
-     Contact Sensor:      sunrise <= sun <= sunset (sun is up)
+      Presence Sensor:     sunrise <= sun <= sunset (sun is up)
       Motion Sensor:       dawn <= sun <= dusk
       Acceleration Sensor: night <= sun <= nightEnd
       Infrared Level:      dayNigthRatio
 
-  Child Contact sensors are:
-      Sun Position (contact opens in the position)
+  Child Presence sensors are:
+      Sun Position (present in the position)
           SunNorth, SunSouth, SunEast, SunWest
           please refer to settings angleFromNorth and angleOfIncidence
           for ideal configuration for your home for these sensors
 
-  Sun Time Interval (contact opens in the interval)
+  Sun Time Interval (present in the interval)
        SunEarlyMorning:   sunrise <= sun <= midmorning
        SunLateMorning:    midmorning <= sun <= noon
        SunEarlyAfternoon: noon <= sun <= midafternoon
