@@ -1,0 +1,110 @@
+# profile
+name: sun.v1
+
+components:
+  - id: main
+    capabilities:
+    - id: presenceSensor
+      version: 1
+    - id: contactSensor
+      version: 1
+    - id: motionSensor
+      version: 1
+    - id: accelerationSensor
+      version: 1
+    - id: infraredLevel
+      version: 1
+    - id: refresh
+      version: 1
+    categories:
+    - name: MultiFunctionalSensor
+
+  - id: North
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: West
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: South
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: East
+    capabilities:
+    - id: contactSensor
+      version: 1
+
+  - id: EarlyMorning
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: LateMorning
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: EarlyAfternoon
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: LateAfternoon
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: EarlyNight
+    capabilities:
+    - id: contactSensor
+      version: 1
+  - id: LateNight
+    capabilities:
+    - id: contactSensor
+      version: 1
+
+preferences:
+  - title: "Home angle from north"
+    name: angleFromNorth
+    description: "Angle (in degrees) of the home from real North, [0,+90] towards East, [0,-90] towards West. Defaults to zero (no correction)."
+    required: true
+    preferenceType: number
+    definition:
+      minimum: -90.0
+      maximum: +90.0
+      default: 55.0
+  - title: "Sun angle of incidence"
+    name: angleOfIncidence
+    description: "Angle (in degrees) from which the incidence of the sun is considered at each cardinal region. Defaults to 45."
+    required: true
+    preferenceType: number
+    definition:
+      minimum: 0.0
+      maximum: 45.0
+      default: 30.0
+
+  - title: "Location latitude"
+    name: locationLatitude
+    description: "Home location latitude (in degrees)."
+    required: true
+    preferenceType: number
+    definition:
+      minimum: -90.0
+      maximum: +90.0
+      default: -21.20168100
+  - title: "Location longitude"
+    name: locationLongitude
+    description: "Home location longitude (in degrees)."
+    required: true
+    preferenceType: number
+    definition:
+      minimum: -180.0
+      maximum: +180.0
+      default: -47.81508000
+  - title: "Timezone Offset"
+    name: timezoneOffset
+    description: "Local hour offset."
+    required: true
+    preferenceType: integer
+    definition:
+      minimum: -12
+      maximum: +12
+      default: -3
