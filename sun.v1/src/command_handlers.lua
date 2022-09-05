@@ -10,7 +10,7 @@ local SunCalc = require('SunCalc')
 -----------------------------------------------------------
 local function ternary(a, b, c) if a then return b end return c end
 
-local function boolPresence( b )     return ternary(b, "present", "not_present")  end
+local function boolPresence( b )     return ternary(b, "present", "not present")  end
 local function boolContact( b )      return ternary(b, "open", "closed")      end
 local function boolMotion( b )       return ternary(b, "active", "inactive")  end
 local function boolAcceleration( b ) return ternary(b, "active", "inactive")  end

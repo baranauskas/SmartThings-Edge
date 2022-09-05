@@ -19,9 +19,6 @@ end
 function lifecycle_handlers.init(driver, device)
   log.info( string.format("initializing device: %s", device.label) )
 
-  device:emit_event( capabilities.presenceSensor.presence.not_present() )
-  device:emit_event( capabilities.infraredLevel.infraredLevel( 50 ) )
-
   lifecycle_handlers.reschedule(driver, device)
   command_handlers.refresh(driver, device)
   device:online()
