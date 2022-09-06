@@ -18,7 +18,7 @@ function discovery.handle_discovery(driver, _should_continue)
     -- the DNI must be unique across your hub, using static ID here so that we
     -- only ever have a single instance of this "device"
     device_network_id = config.device_network_id,
-    label = "Sun Edge Device",
+    label = "Sun",
     profile = "sun.v1",
     manufacturer = "Baranauskas",
     model = "v1",
