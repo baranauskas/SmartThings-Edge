@@ -1,0 +1,31 @@
+dashboard:
+  states:
+    - label: '{{daylightPercentage.value}} {{daylightPercentage.unit}}'
+  actions: []
+detailView:
+  - label: Daytime
+    displayType: state
+    state:
+      label: '{{daytime.value}}'
+      unit: daytime.unit
+  - label: Daylight Percentage
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: daylightPercentage.unit
+      value: daylightPercentage.value
+      valueType: number
+automation:
+  conditions:
+    - label: Daylight Percentage
+      displayType: numberField
+      numberField:
+        value: daylightPercentage.value
+        valueType: number
+        unit: daylightPercentage.unit
+  actions: []
+id: returnamber36996.sunTimes
+version: 1

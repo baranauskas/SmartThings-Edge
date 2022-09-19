@@ -1,0 +1,5 @@
+name: 'Sun [JAB] v2.0'
+packageKey: 'baranauskas.sun.v2'
+permissions:
+  lan: {}
+  discovery: {}
