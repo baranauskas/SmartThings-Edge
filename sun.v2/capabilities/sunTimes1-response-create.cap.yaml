@@ -1,23 +1,9 @@
-name: Sun Times
+id: returnamber36996.sunTimes1
+version: 1
+status: proposed
+name: Sun Times 1
+ephemeral: false
 attributes:
-
-  daytime:
-    schema:
-      type: object
-      properties:
-        value:
-          type: string
-          maxLength: 8
-        unit:
-          type: string
-          enum:
-            - 'h'
-          default: 'h'
-      additionalProperties: false
-      required:
-        - value
-    enumCommands: []
-
   daylightPercentage:
     schema:
       type: object
@@ -35,5 +21,20 @@ attributes:
       required:
         - value
     enumCommands: []
-
+  daytime:
+    schema:
+      type: object
+      properties:
+        value:
+          type: string
+          maxLength: 8
+        unit:
+          type: string
+          enum:
+            - h
+          default: h
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
 commands: {}

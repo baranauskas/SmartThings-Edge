@@ -19,7 +19,7 @@ local function loadCapabilities( names )
   return cap
 end
 
-local cap = loadCapabilities( {"homeAngles", "sunPosition", "sunTimes"} )
+local cap = loadCapabilities( {"homeAngles", "sunPosition", "sunTimes1"} )
 -----------------------------------------------------------
 local function ternary(a, b, c) if a then return b end return c end
 
@@ -63,11 +63,11 @@ function command_handlers.refreshSunPosition(driver, device)
   -- sun position
   local p = SunCalc.getPosition( now , lat, lng )
 
-  local msg = ""
-  for key, value in pairs( p ) do --loop through the table
-    msg = msg .. string.format( "Sun Position %s = %f\n", key, value )
-  end
-  log.info( msg )
+--  local msg = ""
+--  for key, value in pairs( p ) do --loop through the table
+--    msg = msg .. string.format( "Sun Position %s = %f\n", key, value )
+--  end
+--  log.info( msg )
 
 --[[
     Sun Position
@@ -97,6 +97,8 @@ function command_handlers.refreshSunPosition(driver, device)
 --    log.info( string.format( "getTimes from device %s=%s   %s", k, field, config.date.toString(t[field]) ) )
   end
 
+  local eventVis = { visibility = { displayed = false} }
+
   -- main component
   local mainSensors = {
     up             = (p.altitude >= angle.sunriseSunset),
@@ -108,16 +110,13 @@ function command_handlers.refreshSunPosition(driver, device)
   device:emit_event( capabilities.accelerationSensor.acceleration( boolAcceleration( mainSensors.nightEndNight ) ) )
 
   -- child components
-  local componentSensors = {
-          EarlyMorning   = (t.sunrise      <= now and now <= t.midmorning),
-          LateMorning    = (t.midmorning   <= now and now <= t.solarNoon),
-          EarlyAfternoon = (t.solarNoon    <= now and now <= t.midafternoon),
-          LateAfternoon  = (t.midafternoon <= now and now <= t.sunset),
-          EarlyNight     = (t.sunset       <= now or  now <= t.nadir),
-          LateNight      = (t.nadir        <= now and now <= t.sunrise)
-        }
-  for sensor, state in pairs( componentSensors ) do
-    device.profile.components[sensor]:emit_event( capabilities.presenceSensor.presence( boolPresence(state) ) )
+  local positionSensors = {
+          altitude = p.altitude,
+          azimuth  = p.azimuth,
+          azimuthHome = azs
+    }
+  for sensor, state in pairs( positionSensors ) do
+    device.profile.components["Position"]:emit_event( cap.sunPosition[sensor]( state, eventVis ) )
   end
 
   -- home angles
@@ -137,17 +136,21 @@ function command_handlers.refreshSunPosition(driver, device)
           east  = ternary((180.0 <= azs) and (azs < 360.0), azs-180.0, 0)
         }
   for sensor, state in pairs( angleSensors ) do
-    device.profile.components["Angles"]:emit_event( cap.homeAngles[sensor]( state ) )
+    device.profile.components["Angles"]:emit_event( cap.homeAngles[sensor]( state, eventVis ) )
   end
 
-  local positionSensors = {
-          altitude = p.altitude,
-          azimuth  = p.azimuth,
-          azimuthHome = azs
-    }
-  for sensor, state in pairs( positionSensors ) do
-    device.profile.components["Position"]:emit_event( cap.sunPosition[sensor]( state ) )
+  local componentSensors = {
+          EarlyMorning   = (t.sunrise      <= now and now <= t.midmorning),
+          LateMorning    = (t.midmorning   <= now and now <= t.solarNoon),
+          EarlyAfternoon = (t.solarNoon    <= now and now <= t.midafternoon),
+          LateAfternoon  = (t.midafternoon <= now and now <= t.sunset),
+          EarlyNight     = (t.sunset       <= now or  now <= t.nadir),
+          LateNight      = (t.nadir        <= now and now <= t.sunrise)
+        }
+  for sensor, state in pairs( componentSensors ) do
+    device.profile.components[sensor]:emit_event( capabilities.presenceSensor.presence( boolPresence(state), eventVis ) )
   end
+
 end
 -----------------------------------------------------------
 function command_handlers.refreshSunTimes(driver, device)
@@ -186,8 +189,8 @@ function command_handlers.refreshSunTimes(driver, device)
   local daytime = config.date.toStringTime( result.daytime )
   log.info( string.format( "daytime = %s", daytime ) )
 
-  device.profile.components["Times"]:emit_event( cap.sunTimes.daylightPercentage( daylightPercentage ) )
-  device.profile.components["Times"]:emit_event( cap.sunTimes.daytime( daytime ) )
+  device.profile.components["Times"]:emit_event( cap.sunTimes1.daylightPercentage( daylightPercentage ) )
+  device.profile.components["Times"]:emit_event( cap.sunTimes1.daytime( daytime ) )
 end
 -----------------------------------------------------------
 return command_handlers

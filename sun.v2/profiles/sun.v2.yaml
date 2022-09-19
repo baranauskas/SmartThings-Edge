@@ -27,7 +27,7 @@ components:
 
   - id: Times
     capabilities:
-    - id: returnamber36996.sunTimes
+    - id: returnamber36996.sunTimes1
       version: 1
 
   - id: EarlyMorning
