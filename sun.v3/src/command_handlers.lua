@@ -6,17 +6,16 @@ local capabilities = require('st.capabilities')
 local log = require('log')
 
 local config = require('config')
+local seasons = require('seasons')
 local SunCalc = require('SunCalc')
 
-local capList = {"homeAngles", "sunPosition", "sunTimes1"}
+local capList = {"homeAngles", "sunPosition", "sunTimes1", "seasonsPercentage1"}
 local cap = config.capabilities.load( capList )
 -----------------------------------------------------------
-local function ternary(a, b, c) if a then return b end return c end
-
-local function boolPresence( b )     return ternary(b, "present", "not present")  end
-local function boolContact( b )      return ternary(b, "open", "closed")      end
-local function boolMotion( b )       return ternary(b, "active", "inactive")  end
-local function boolAcceleration( b ) return ternary(b, "active", "inactive")  end
+local function boolPresence( b )     return config.ternary(b, "present", "not present")  end
+local function boolContact( b )      return config.ternary(b, "open", "closed")      end
+local function boolMotion( b )       return config.ternary(b, "active", "inactive")  end
+local function boolAcceleration( b ) return config.ternary(b, "active", "inactive")  end
 
 --  Computes compass arithmetic (in degrees)
 local function compassArithmetic( expression )
@@ -117,13 +116,13 @@ function command_handlers.refreshSunPosition(driver, device)
     South = sun_up and (( 90.0 + aoi) <= azc and azc < (270.0 - aoi)),
     East  = sun_up and ((180.0 + aoi) <= azc and azc < (360.0 - aoi)),
   ]]
---  local azsNorth = ternary(270.0<=azs, azs-270.0, ternary(azs<90.0,azs+90.0, 0) )
+--  local azsNorth = config..ternary(270.0<=azs, azs-270.0, config.ternary(azs<90.0,azs+90.0, 0) )
   local angleSensors = {
---          north = ternary((270.0 <= azs) or  (azs <  90.0), azsNorth,  0,
-          north = ternary(270.0<=azs, azs-270.0, ternary(azs<90.0,azs+90.0, 0) ),
-          west  = ternary((  0.0 <= azs) and (azs < 180.0), azs      , 0),
-          south = ternary(( 90.0 <= azs) and (azs < 270.0), azs- 90.0, 0),
-          east  = ternary((180.0 <= azs) and (azs < 360.0), azs-180.0, 0)
+--          north = config.ternary((270.0 <= azs) or  (azs <  90.0), azsNorth,  0,
+          north = config.ternary(270.0<=azs, azs-270.0, config.ternary(azs<90.0,azs+90.0, 0) ),
+          west  = config.ternary((  0.0 <= azs) and (azs < 180.0), azs      , 0),
+          south = config.ternary(( 90.0 <= azs) and (azs < 270.0), azs- 90.0, 0),
+          east  = config.ternary((180.0 <= azs) and (azs < 360.0), azs-180.0, 0)
         }
   for sensor, state in pairs( angleSensors ) do
     device.profile.components["Angles"]:emit_event( cap.homeAngles[sensor]( state, eventVis ) )
@@ -140,7 +139,6 @@ function command_handlers.refreshSunPosition(driver, device)
   for sensor, state in pairs( componentSensors ) do
     device.profile.components[sensor]:emit_event( capabilities.presenceSensor.presence( boolPresence(state), eventVis ) )
   end
-
 end
 -----------------------------------------------------------
 function command_handlers.refreshSunTimes(driver, device)
@@ -150,6 +148,8 @@ function command_handlers.refreshSunTimes(driver, device)
   local noon = config.date.toNoon( now )
   local lat = device.preferences.locationLatitude
   local lng = device.preferences.locationLongitude
+--  local tzo = device.preferences.timezoneOffset
+
 --  log.info( string.format( "now=%s, noon=%s", config.date.toString(now), config.date.toString(noon) ) )
 --  log.info( string.format( "now tz=%s, noon tz=%s", config.date.toString(now, device.preferences.timezoneOffset),
 --                            config.date.toString(noon, device.preferences.timezoneOffset) )  )
@@ -179,8 +179,20 @@ function command_handlers.refreshSunTimes(driver, device)
   local daytime = config.date.toStringTime( result.daytime )
   log.info( string.format( "daytime = %s", daytime ) )
 
+  local eventVis = { visibility = { displayed = false} }
+
   device.profile.components["Times"]:emit_event( cap.sunTimes1.daylightPercentage( daylightPercentage ) )
   device.profile.components["Times"]:emit_event( cap.sunTimes1.daytime( daytime ) )
+
+  local isNorth = (lat >= 0)
+  local seasonSensors = seasons.getSeasons( now, isNorth )
+  for sensor, states in pairs( seasonSensors ) do
+    local state = states.percentage
+    local eventVis = { visibility = { displayed = (state > 0) } }
+--    local day = config.date.toString( states.osTime, tzo )
+--    log.info( string.format( "season = %s, start=%s, percentage=%6.2f", sensor, day, state ) )
+    device.profile.components["Seasons"]:emit_event( cap.seasonsPercentage1[sensor]( state, eventVis ) )
+  end
 end
 -----------------------------------------------------------
 return command_handlers

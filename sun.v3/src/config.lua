@@ -3,10 +3,13 @@
 -- 2022 08 30 v1
 -----------------------------------------------------------
 local capabilities = require('st.capabilities')
-
-
 -----------------------------------------------------------
 local config = {}
+-----------------------------------------------------------
+config.device_network_id = "Baranauskas-sun-20220920"
+-----------------------------------------------------------
+-- for simple translation of javascript ternary comparison operator ?:
+function config.ternary(a, b, c) if a then return b end return c end
 -----------------------------------------------------------
 config.schedule = {}
 -- schedule period in seconds
@@ -71,10 +74,6 @@ end
 config.math = {}
 
 function config.math.round(x) return math.floor( x + 0.5 ) end
------------------------------------------------------------
-config.device_network_id = "Baranauskas-sun-20220920"
-
-
 -----------------------------------------------------------
 config.capabilities = {}
 

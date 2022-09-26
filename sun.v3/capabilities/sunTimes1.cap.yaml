@@ -1,0 +1,39 @@
+name: Sun Times 1
+attributes:
+
+  daytime:
+    schema:
+      type: object
+      properties:
+        value:
+          type: string
+          maxLength: 8
+        unit:
+          type: string
+          enum:
+            - 'h'
+          default: 'h'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+  daylightPercentage:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+commands: {}

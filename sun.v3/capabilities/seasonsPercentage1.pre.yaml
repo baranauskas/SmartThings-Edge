@@ -1,0 +1,90 @@
+id: returnamber36996.seasonsPercentage1
+version: 1
+
+dashboard:
+  states:
+    - label: '{{summer.value}} {{summer.unit}}'
+      alternatives: null
+  actions: []
+  basicPlus: []
+
+detailView:
+  - label: 'Summer'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      valueType: number
+      value: summer.value
+      unit: summer.unit
+    state: null
+
+  - label: 'Autumn'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      valueType: number
+      value: autumn.value
+      unit: autumn.unit
+    state: null
+
+  - label: 'Winter'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      valueType: number
+      value: winter.value
+      unit: winter.unit
+    state: null
+
+  - label: 'Spring'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      valueType: number
+      value: spring.value
+      unit: spring.unit
+    state: null
+
+automation:
+  conditions:
+    - label: 'Summer'
+      displayType: numberField
+      numberField:
+        value: summer.value
+        valueType: number
+        unit: summer.unit
+
+    - label: 'Autumn'
+      displayType: numberField
+      numberField:
+        value: autumn.value
+        valueType: number
+        unit: autumn.unit
+
+    - label: 'Winter'
+      displayType: numberField
+      numberField:
+        value: winter.value
+        valueType: number
+        unit: winter.unit
+
+    - label: 'Spring'
+      displayType: numberField
+      numberField:
+        value: spring.value
+        valueType: number
+        unit: spring.unit
+
+  actions: []

@@ -1,0 +1,75 @@
+id: returnamber36996.seasonsPercentage1
+version: 1
+status: proposed
+name: Seasons Percentage 1
+ephemeral: false
+attributes:
+  spring:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+  winter:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+  autumn:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+  summer:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+commands: {}

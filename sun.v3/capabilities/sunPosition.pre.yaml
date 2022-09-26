@@ -1,0 +1,71 @@
+id: returnamber36996.sunPosition
+version: 1
+
+dashboard:
+  states:
+    - label: '{{altitude.value}} {{altitude.unit}}'
+      alternatives: null
+  actions: []
+  basicPlus: []
+
+detailView:
+  - label: 'Altitude'
+    displayType: slider
+    slider:
+      range:
+        - -90
+        - +90
+      step: 1
+      valueType: number
+      value: altitude.value
+      unit: altitude.unit
+    state: null
+
+  - label: 'Azimuth'
+    displayType: slider
+    slider:
+      range:
+        - -180
+        - +180
+      step: 1
+      valueType: number
+      value: azimuth.value
+      unit: azimuth.unit
+    state: null
+
+  - label: 'Azimuth Home'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 360
+      step: 1
+      valueType: number
+      value: azimuthHome.value
+      unit: azimuthHome.unit
+    state: null
+
+automation:
+  conditions:
+    - label: 'Altitude'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: altitude.value
+        unit: altitude.unit
+
+    - label: 'Azimuth'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: azimuth.value
+        unit: azimuth.unit
+
+    - label: 'Azimuth Home'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: azimuthHome.value
+        unit: azimuthHome.unit
+
+  actions: []

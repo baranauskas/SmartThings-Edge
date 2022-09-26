@@ -1,0 +1,58 @@
+dashboard:
+  states:
+    - label: '{{altitude.value}} {{altitude.unit}}'
+  actions: []
+detailView:
+  - label: Altitude
+    displayType: slider
+    slider:
+      range:
+        - -90
+        - 90
+      step: 1
+      unit: altitude.unit
+      value: altitude.value
+      valueType: number
+  - label: Azimuth
+    displayType: slider
+    slider:
+      range:
+        - -180
+        - 180
+      step: 1
+      unit: azimuth.unit
+      value: azimuth.value
+      valueType: number
+  - label: Azimuth Home
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 360
+      step: 1
+      unit: azimuthHome.unit
+      value: azimuthHome.value
+      valueType: number
+automation:
+  conditions:
+    - label: Altitude
+      displayType: numberField
+      numberField:
+        value: altitude.value
+        valueType: number
+        unit: altitude.unit
+    - label: Azimuth
+      displayType: numberField
+      numberField:
+        value: azimuth.value
+        valueType: number
+        unit: azimuth.unit
+    - label: Azimuth Home
+      displayType: numberField
+      numberField:
+        value: azimuthHome.value
+        valueType: number
+        unit: azimuthHome.unit
+  actions: []
+id: returnamber36996.sunPosition
+version: 1
