@@ -25,6 +25,11 @@ components:
     - id: returnamber36996.homeAngles
       version: 1
 
+  - id: PartsOfTheDay
+    capabilities:
+    - id: returnamber36996.partsOfTheDay1
+      version: 1
+
   - id: Times
     capabilities:
     - id: returnamber36996.sunTimes1
@@ -33,31 +38,6 @@ components:
   - id: Seasons
     capabilities:
     - id: returnamber36996.seasonsPercentage1
-      version: 1
-
-  - id: EarlyMorning
-    capabilities:
-    - id: presenceSensor
-      version: 1
-  - id: LateMorning
-    capabilities:
-    - id: presenceSensor
-      version: 1
-  - id: EarlyAfternoon
-    capabilities:
-    - id: presenceSensor
-      version: 1
-  - id: LateAfternoon
-    capabilities:
-    - id: presenceSensor
-      version: 1
-  - id: EarlyNight
-    capabilities:
-    - id: presenceSensor
-      version: 1
-  - id: LateNight
-    capabilities:
-    - id: presenceSensor
       version: 1
 
 preferences:
@@ -80,6 +60,7 @@ preferences:
       minimum: -90.0
       maximum: +90.0
       default: -21.20168100
+
   - title: "Location longitude"
     name: locationLongitude
     description: "Home location longitude (in degrees)."
@@ -89,6 +70,7 @@ preferences:
       minimum: -180.0
       maximum: +180.0
       default: -47.81508000
+
   - title: "Timezone Offset"
     name: timezoneOffset
     description: "Local hour offset from UTC."

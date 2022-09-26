@@ -1,0 +1,58 @@
+name: Parts Of The Day 1
+attributes:
+
+  morning:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+  afternoon:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+  night:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+commands: {}

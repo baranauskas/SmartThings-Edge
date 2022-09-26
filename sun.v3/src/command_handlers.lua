@@ -9,11 +9,12 @@ local config = require('config')
 local seasons = require('seasons')
 local SunCalc = require('SunCalc')
 
-local capList = {"homeAngles", "sunPosition", "sunTimes1", "seasonsPercentage1"}
+local capList = {"homeAngles", "sunPosition", "sunTimes1",
+                 "seasonsPercentage1", "partsOfTheDay1"}
 local cap = config.capabilities.load( capList )
 -----------------------------------------------------------
 local function boolPresence( b )     return config.ternary(b, "present", "not present")  end
-local function boolContact( b )      return config.ternary(b, "open", "closed")      end
+--local function boolContact( b )      return config.ternary(b, "open", "closed")      end
 local function boolMotion( b )       return config.ternary(b, "active", "inactive")  end
 local function boolAcceleration( b ) return config.ternary(b, "active", "inactive")  end
 
@@ -35,7 +36,7 @@ local SunCalcTimes = {"nightEnd", "nauticalDawn", "dawn",
              "night", "dusk", "nauticalDusk",
              "nadir"
             }
- -----------------------------------------------------------
+-----------------------------------------------------------
 local command_handlers = {}
 -----------------------------------------------------------
 function command_handlers.refresh(driver, device)
@@ -98,7 +99,7 @@ function command_handlers.refreshSunPosition(driver, device)
   device:emit_event( capabilities.motionSensor.motion( boolMotion( mainSensors.dawnDusk ) ) )
   device:emit_event( capabilities.accelerationSensor.acceleration( boolAcceleration( mainSensors.nightEndNight ) ) )
 
-  -- child components
+  -- components
   local positionSensors = {
           altitude = p.altitude,
           azimuth  = p.azimuth,
@@ -128,6 +129,7 @@ function command_handlers.refreshSunPosition(driver, device)
     device.profile.components["Angles"]:emit_event( cap.homeAngles[sensor]( state, eventVis ) )
   end
 
+--[[
   local componentSensors = {
           EarlyMorning   = (t.sunrise      <= now and now <= t.midmorning),
           LateMorning    = (t.midmorning   <= now and now <= t.solarNoon),
@@ -138,6 +140,34 @@ function command_handlers.refreshSunPosition(driver, device)
         }
   for sensor, state in pairs( componentSensors ) do
     device.profile.components[sensor]:emit_event( capabilities.presenceSensor.presence( boolPresence(state), eventVis ) )
+  end
+]]
+
+  local potdSensors = {} -- parts of the day
+  -- morning
+  if (t.sunrise <= now and now <= t.solarNoon) then
+    potdSensors.morning = 100 * (now - t.sunrise) / (t.solarNoon - t.sunrise)
+  else
+    potdSensors.morning = 0
+  end
+  -- afternoon
+  if (t.solarNoon <= now and now <= t.sunset) then
+    potdSensors.afternoon = 100 * (now - t.solarNoon) / (t.sunset - t.solarNoon)
+  else
+    potdSensors.afternoon = 0
+  end
+  -- night
+  if (t.sunset <= now) then
+    potdSensors.night = 100 * (      0.5 * (now - t.sunset) / ((t.nadir + 26*60*60) - t.sunset))
+  elseif (now <= t.sunrise) then
+    potdSensors.night = 100 * (0.5 + 0.5 * math.abs(now - t.nadir) / (t.sunrise - t.nadir))
+  else
+    potdSensors.night = 0
+  end
+
+  for sensor, state in pairs( potdSensors ) do
+--    device:emit_event( cap.partsOfTheDay1[sensor]( state, eventVis ) )
+    device.profile.components["PartsOfTheDay"]:emit_event( cap.partsOfTheDay1[sensor]( state, eventVis ) )
   end
 end
 -----------------------------------------------------------
@@ -179,7 +209,7 @@ function command_handlers.refreshSunTimes(driver, device)
   local daytime = config.date.toStringTime( result.daytime )
   log.info( string.format( "daytime = %s", daytime ) )
 
-  local eventVis = { visibility = { displayed = false} }
+--  local eventVis = { visibility = { displayed = false} }
 
   device.profile.components["Times"]:emit_event( cap.sunTimes1.daylightPercentage( daylightPercentage ) )
   device.profile.components["Times"]:emit_event( cap.sunTimes1.daytime( daytime ) )
