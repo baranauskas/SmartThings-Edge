@@ -53,6 +53,10 @@ function config.date.toNoon( osTime )
   return noon
 end
 
+function config.date.getMonth( osTime )
+  return os.date("!*t", osTime ).month
+end
+
 function config.date.toString( osTime, timezone )
   osTime = config.math.round( osTime or os.time() )
   timezone = timezone or 0

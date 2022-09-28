@@ -32,7 +32,7 @@ components:
 
   - id: Times
     capabilities:
-    - id: returnamber36996.sunTimes1
+    - id: returnamber36996.sunTimes2
       version: 1
 
   - id: Seasons
@@ -49,7 +49,7 @@ preferences:
     definition:
       minimum: -90.0
       maximum: +90.0
-      default: 55.0
+      default: 38.0
 
   - title: "Location latitude"
     name: locationLatitude

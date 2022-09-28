@@ -9,7 +9,7 @@ local config = require('config')
 local seasons = require('seasons')
 local SunCalc = require('SunCalc')
 
-local capList = {"homeAngles", "sunPosition", "sunTimes1",
+local capList = {"homeAngles", "sunPosition", "sunTimes2",
                  "seasonsPercentage1", "partsOfTheDay1"}
 local cap = config.capabilities.load( capList )
 -----------------------------------------------------------
@@ -176,6 +176,7 @@ function command_handlers.refreshSunTimes(driver, device)
   --
   local now = os.time()
   local noon = config.date.toNoon( now )
+  local month = config.date.getMonth( now )
   local lat = device.preferences.locationLatitude
   local lng = device.preferences.locationLongitude
 --  local tzo = device.preferences.timezoneOffset
@@ -201,18 +202,18 @@ function command_handlers.refreshSunTimes(driver, device)
 --    device:set_field(k, v)
   end
 
-  -- daylightPercentage
-  local daylightPercentage = 100 * (result.daytime - tm) / (24*60*60)
-  log.info( string.format( "daylightPercentage = %6.2f", daylightPercentage ) )
---  device:set_field( "daylightPercentage", daylightPercentage )
+  -- dayLength Percentage
+  local dayLength = 100 * (result.daytime - tm) / (24*60*60)
+--  log.info( string.format( "dayLength = %6.2f", dayLength ) )
+--  device:set_field( "dayLength", dayLength )
 
-  local daytime = config.date.toStringTime( result.daytime )
-  log.info( string.format( "daytime = %s", daytime ) )
+--  local daytime = config.date.toStringTime( result.daytime )
+--  log.info( string.format( "daytime = %s", daytime ) )
 
 --  local eventVis = { visibility = { displayed = false} }
 
-  device.profile.components["Times"]:emit_event( cap.sunTimes1.daylightPercentage( daylightPercentage ) )
-  device.profile.components["Times"]:emit_event( cap.sunTimes1.daytime( daytime ) )
+  device.profile.components["Times"]:emit_event( cap.sunTimes2.dayLength( dayLength ) )
+  device.profile.components["Times"]:emit_event( cap.sunTimes2.month( month ) )
 
   local isNorth = (lat >= 0)
   local seasonSensors = seasons.getSeasons( now, isNorth )

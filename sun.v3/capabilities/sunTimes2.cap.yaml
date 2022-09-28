@@ -1,0 +1,35 @@
+name: Sun Times 2
+attributes:
+
+  month:
+    schema:
+      type: object
+      properties:
+        value:
+          type: integer
+          minimum: 1
+          maximum: 12
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+  dayLength:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 100
+        unit:
+          type: string
+          enum:
+            - '%'
+          default: '%'
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+
+commands: {}

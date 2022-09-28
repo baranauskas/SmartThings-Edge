@@ -1,0 +1,109 @@
+dashboard:
+  states:
+    - label: '{{dayLength.value}} {{dayLength.unit}}'
+  actions: []
+detailView:
+  - label: Month
+    displayType: state
+    state:
+      label: '{{month.value}}'
+      alternatives:
+        - key: '1'
+          value: January
+          type: active
+        - key: '2'
+          value: February
+          type: active
+        - key: '3'
+          value: March
+          type: active
+        - key: '4'
+          value: April
+          type: active
+        - key: '5'
+          value: May
+          type: active
+        - key: '6'
+          value: June
+          type: active
+        - key: '7'
+          value: July
+          type: active
+        - key: '8'
+          value: August
+          type: active
+        - key: '9'
+          value: September
+          type: active
+        - key: '10'
+          value: October
+          type: active
+        - key: '11'
+          value: November
+          type: active
+        - key: '12'
+          value: December
+          type: active
+  - label: Day Length
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: dayLengthe.unit
+      value: dayLength.value
+      valueType: number
+automation:
+  conditions:
+    - label: Month
+      displayType: list
+      list:
+        alternatives:
+          - key: '1'
+            value: January
+            type: active
+          - key: '2'
+            value: February
+            type: active
+          - key: '3'
+            value: March
+            type: active
+          - key: '4'
+            value: April
+            type: active
+          - key: '5'
+            value: May
+            type: active
+          - key: '6'
+            value: June
+            type: active
+          - key: '7'
+            value: July
+            type: active
+          - key: '8'
+            value: August
+            type: active
+          - key: '9'
+            value: September
+            type: active
+          - key: '10'
+            value: October
+            type: active
+          - key: '11'
+            value: November
+            type: active
+          - key: '12'
+            value: December
+            type: active
+        value: month.value
+        valueType: integer
+    - label: Day Length
+      displayType: numberField
+      numberField:
+        value: dayLength.value
+        valueType: number
+        unit: dayLength.unit
+  actions: []
+id: returnamber36996.sunTimes2
+version: 1

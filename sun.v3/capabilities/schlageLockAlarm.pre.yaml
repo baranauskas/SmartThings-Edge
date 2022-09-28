@@ -1,0 +1,164 @@
+dashboard:
+  states:
+    - label: '{{alarmMode.value}}'
+  actions: []
+detailView:
+  - label: '{{i18n.label}}'
+    displayType: list
+    list:
+      command:
+        name: setAlarmMode
+        alternatives:
+          - key: 'off'
+            value: '{{i18n.commands.setAlarmMode.arguments.mode.i18n.off.label}}'
+            type: inactive
+          - key: activity
+            value: '{{i18n.commands.setAlarmMode.arguments.mode.i18n.activity.label}}'
+            type: active
+          - key: tamper
+            value: '{{i18n.commands.setAlarmMode.arguments.mode.i18n.tamper.label}}'
+            type: active
+          - key: forcedentry
+            value: >-
+              {{i18n.commands.setAlarmMode.arguments.mode.i18n.forcedentry.label}}
+            type: active
+        argumentType: string
+      state:
+        value: alarmMode.value
+        valueType: string
+        alternatives:
+          - key: 'off'
+            value: '{{i18n.attributes.alarmMode.i18n.value.off.label}}'
+            type: inactive
+          - key: activity
+            value: '{{i18n.attributes.alarmMode.i18n.value.activity.label}}'
+            type: active
+          - key: tamper
+            value: '{{i18n.attributes.alarmMode.i18n.value.tamper.label}}'
+            type: active
+          - key: forcedentry
+            value: '{{i18n.attributes.alarmMode.i18n.value.forcedentry.label}}'
+            type: active
+  - label: '{{i18n.label}}'
+    displayType: slider
+    slider:
+      range:
+        - 1
+        - 5
+      step: 1
+      command: setActivitySensitivity
+      argumentType: integer
+      value: activitySensitivity.value
+      valueType: integer
+  - label: '{{i18n.label}}'
+    displayType: slider
+    slider:
+      range:
+        - 1
+        - 5
+      step: 1
+      command: setTamperSensitivity
+      argumentType: integer
+      value: tamperSensitivity.value
+      valueType: integer
+  - label: '{{i18n.label}}'
+    displayType: slider
+    slider:
+      range:
+        - 1
+        - 5
+      step: 1
+      command: setForcedSensitivity
+      argumentType: integer
+      value: forcedEntrySensitivity.value
+      valueType: integer
+automation:
+  conditions:
+    - label: '{{i18n.attributes.alarmMode.label}}'
+      displayType: list
+      list:
+        alternatives:
+          - key: 'off'
+            value: '{{i18n.attributes.alarmMode.i18n.value.off.label}}'
+            type: inactive
+          - key: activity
+            value: '{{i18n.attributes.alarmMode.i18n.value.activity.label}}'
+            type: active
+          - key: tamper
+            value: '{{i18n.attributes.alarmMode.i18n.value.tamper.label}}'
+            type: active
+          - key: forcedentry
+            value: '{{i18n.attributes.alarmMode.i18n.value.forcedentry.label}}'
+            type: active
+        value: alarmMode.value
+        valueType: string
+    - label: '{{i18n.attributes.activitySensitivity.label}}'
+      displayType: slider
+      slider:
+        range:
+          - 1
+          - 5
+        value: activitySensitivity.value
+        valueType: integer
+    - label: '{{i18n.attributes.tamperSensitivity.label}}'
+      displayType: slider
+      slider:
+        range:
+          - 1
+          - 5
+        value: tamperSensitivity.value
+        valueType: integer
+    - label: '{{i18n.attributes.forcedEntrySensitivity.label}}'
+      displayType: slider
+      slider:
+        range:
+          - 1
+          - 5
+        value: forcedEntrySensitivity.value
+        valueType: integer
+  actions:
+    - label: '{{i18n.commands.setAlarmMode.label}}'
+      displayType: list
+      list:
+        alternatives:
+          - key: 'off'
+            value: '{{i18n.commands.setAlarmMode.arguments.mode.i18n.off.label}}'
+            type: inactive
+          - key: activity
+            value: '{{i18n.commands.setAlarmMode.arguments.mode.i18n.activity.label}}'
+            type: active
+          - key: tamper
+            value: '{{i18n.commands.setAlarmMode.arguments.mode.i18n.tamper.label}}'
+            type: active
+          - key: forcedentry
+            value: >-
+              {{i18n.commands.setAlarmMode.arguments.mode.i18n.forcedentry.label}}
+            type: active
+        command: setAlarmMode
+        argumentType: string
+    - label: '{{i18n.commands.setActivitySensitivity.label}}'
+      displayType: slider
+      slider:
+        range:
+          - 1
+          - 5
+        command: setActivitySensitivity
+        argumentType: integer
+    - label: '{{i18n.commands.setTamperSensitivity.label}}'
+      displayType: slider
+      slider:
+        range:
+          - 1
+          - 5
+        command: setTamperSensitivity
+        argumentType: integer
+    - label: '{{i18n.commands.setForcedSensitivity.label}}'
+      displayType: slider
+      slider:
+        range:
+          - 1
+          - 5
+        command: setForcedSensitivity
+        argumentType: integer
+id: platinummassive43262.schlageLockAlarm
+version: 1

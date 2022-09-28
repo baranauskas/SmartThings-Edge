@@ -1,0 +1,126 @@
+id: platinummassive43262.schlageLockAlarm
+version: 1
+status: proposed
+name: Schlage Lock Alarm
+ephemeral: false
+attributes:
+  alarmMode:
+    schema:
+      type: object
+      properties:
+        value:
+          title: AlarmMode
+          type: string
+          enum:
+            - 'off'
+            - activity
+            - tamper
+            - forcedentry
+      additionalProperties: false
+      required:
+        - value
+    setter: setAlarmMode
+    enumCommands:
+      - command: 'off'
+        value: 'off'
+      - command: activity
+        value: activity
+      - command: tamper
+        value: tamper
+      - command: forcedentry
+        value: forcedentry
+  activitySensitivity:
+    schema:
+      title: Activity sensitivity
+      type: object
+      properties:
+        value:
+          type: integer
+          minimum: 1
+          maximum: 5
+      additionalProperties: false
+      required:
+        - value
+    setter: setActivitySensitivity
+    enumCommands: []
+  forcedEntrySensitivity:
+    schema:
+      title: Forced entry sensitivity
+      type: object
+      properties:
+        value:
+          type: integer
+          minimum: 1
+          maximum: 5
+      additionalProperties: false
+      required:
+        - value
+    setter: setForcedSensitivity
+    enumCommands: []
+  tamperSensitivity:
+    schema:
+      title: Tamper sensitivity
+      type: object
+      properties:
+        value:
+          type: integer
+          minimum: 1
+          maximum: 5
+      additionalProperties: false
+      required:
+        - value
+    setter: setTamperSensitivity
+    enumCommands: []
+commands:
+  tamper:
+    name: tamper
+    arguments: []
+  setForcedSensitivity:
+    name: setForcedSensitivity
+    arguments:
+      - name: sensitivity
+        optional: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5
+  activity:
+    name: activity
+    arguments: []
+  setAlarmMode:
+    name: setAlarmMode
+    arguments:
+      - name: mode
+        optional: false
+        schema:
+          title: AlarmMode
+          type: string
+          enum:
+            - 'off'
+            - activity
+            - tamper
+            - forcedentry
+  setActivitySensitivity:
+    name: setActivitySensitivity
+    arguments:
+      - name: sensitivity
+        optional: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5
+  setTamperSensitivity:
+    name: setTamperSensitivity
+    arguments:
+      - name: sensitivity
+        optional: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5
+  forcedentry:
+    name: forcedentry
+    arguments: []
+  'off':
+    name: 'off'
+    arguments: []

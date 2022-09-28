@@ -1,0 +1,88 @@
+id: returnamber36996.sunTimes2
+version: 1
+
+dashboard:
+  states:
+    - label: '{{dayLength.value}} {{dayLength.unit}}'
+      alternatives: null
+  actions: []
+  basicPlus: []
+
+detailView:
+  - label: 'Month'
+    displayType: slider
+    slider:
+      range:
+        - 1
+        - 12
+      step: 1
+      valueType: integer
+      value: month.value
+    state:
+      label: '{{month.value}}'
+      alternatives:
+        - key: 1
+          value: "January"
+          type: active
+        - key: 2
+          value: "February"
+          type: active
+        - key: 3
+          value: "March"
+          type: active
+        - key: 4
+          value: "April"
+          type: active
+        - key: 5
+          value: "May"
+          type: active
+        - key: 6
+          value: "June"
+          type: active
+        - key: 7
+          value: "July"
+          type: active
+        - key: 8
+          value: "August"
+          type: active
+        - key: 9
+          value: "September"
+          type: active
+        - key: 10
+          value: "October"
+          type: active
+        - key: 11
+          value: "November"
+          type: active
+        - key: 12
+          value: "December"
+          type: active
+
+  - label: 'Day Length'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      valueType: number
+      value: dayLength.value
+      unit: dayLength.unit
+    state: null
+
+automation:
+  conditions:
+    - label: 'Month'
+      displayType: numberField
+      numberField:
+        value: month.value
+        valueType: integer
+
+    - label: 'Day Length'
+      displayType: numberField
+      numberField:
+        value: dayLength.value
+        valueType: number
+        unit: dayLength.unit
+
+  actions: []
