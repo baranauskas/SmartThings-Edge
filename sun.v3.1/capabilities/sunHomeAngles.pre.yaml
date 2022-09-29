@@ -1,0 +1,89 @@
+id: returnamber36996.sunHomeAngles
+version: 1
+dashboard:
+  states:
+    - label: '{{north.value}} {{north.unit}}'
+      alternatives: null
+  actions: []
+  basicPlus: []
+
+detailView:
+  - label: 'North'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 180
+      step: 1
+      valueType: number
+      value: north.value
+      unit: north.unit
+    state: null
+
+  - label: 'West'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 180
+      step: 1
+      valueType: number
+      value: west.value
+      unit: west.unit
+    state: null
+
+  - label: 'South'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 180
+      step: 1
+      valueType: number
+      value: south.value
+      unit: south.unit
+    state: null
+
+  - label: 'East'
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 180
+      step: 1
+      valueType: number
+      value: east.value
+      unit: east.unit
+    state: null
+
+automation:
+  conditions:
+    - label: 'North'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: north.value
+        unit: north.unit
+
+    - label: 'West'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: west.value
+        unit: west.unit
+
+    - label: 'South'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: south.value
+        unit: south.unit
+
+    - label: 'East'
+      displayType: numberField
+      numberField:
+        valueType: number
+        value: east.value
+        unit: east.unit
+
+  actions: []

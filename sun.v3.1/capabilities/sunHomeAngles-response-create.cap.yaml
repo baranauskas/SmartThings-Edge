@@ -1,0 +1,75 @@
+id: returnamber36996.sunHomeAngles
+version: 1
+status: proposed
+name: Sun Home Angles
+ephemeral: false
+attributes:
+  east:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 180
+        unit:
+          type: string
+          enum:
+            - deg
+          default: deg
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+  south:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 180
+        unit:
+          type: string
+          enum:
+            - deg
+          default: deg
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+  north:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 180
+        unit:
+          type: string
+          enum:
+            - deg
+          default: deg
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+  west:
+    schema:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+          maximum: 180
+        unit:
+          type: string
+          enum:
+            - deg
+          default: deg
+      additionalProperties: false
+      required:
+        - value
+    enumCommands: []
+commands: {}

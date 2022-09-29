@@ -1,0 +1,74 @@
+dashboard:
+  states:
+    - label: '{{summer.value}} {{summer.unit}}'
+  actions: []
+detailView:
+  - label: Summer
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: summer.unit
+      value: summer.value
+      valueType: number
+  - label: Autumn
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: autumn.unit
+      value: autumn.value
+      valueType: number
+  - label: Winter
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: winter.unit
+      value: winter.value
+      valueType: number
+  - label: Spring
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: spring.unit
+      value: spring.value
+      valueType: number
+automation:
+  conditions:
+    - label: Summer
+      displayType: numberField
+      numberField:
+        value: summer.value
+        valueType: number
+        unit: summer.unit
+    - label: Autumn
+      displayType: numberField
+      numberField:
+        value: autumn.value
+        valueType: number
+        unit: autumn.unit
+    - label: Winter
+      displayType: numberField
+      numberField:
+        value: winter.value
+        valueType: number
+        unit: winter.unit
+    - label: Spring
+      displayType: numberField
+      numberField:
+        value: spring.value
+        valueType: number
+        unit: spring.unit
+  actions: []
+id: returnamber36996.sunSeasons
+version: 1

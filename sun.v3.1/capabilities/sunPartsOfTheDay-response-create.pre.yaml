@@ -1,0 +1,58 @@
+dashboard:
+  states:
+    - label: '{{morning.value}} {{morning.unit}}'
+  actions: []
+detailView:
+  - label: Morning
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: morning.unit
+      value: morning.value
+      valueType: number
+  - label: Afternoon
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: afternoon.unit
+      value: afternoon.value
+      valueType: number
+  - label: Night
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: night.unit
+      value: night.value
+      valueType: number
+automation:
+  conditions:
+    - label: Morning
+      displayType: numberField
+      numberField:
+        value: morning.value
+        valueType: number
+        unit: morning.unit
+    - label: Afternoon
+      displayType: numberField
+      numberField:
+        value: afternoon.value
+        valueType: number
+        unit: afternoon.unit
+    - label: Night
+      displayType: numberField
+      numberField:
+        value: night.value
+        valueType: number
+        unit: night.unit
+  actions: []
+id: returnamber36996.sunPartsOfTheDay
+version: 1

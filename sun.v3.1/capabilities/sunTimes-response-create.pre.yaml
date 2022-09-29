@@ -1,0 +1,26 @@
+dashboard:
+  states:
+    - label: '{{dayLength.value}} {{dayLength.unit}}'
+  actions: []
+detailView:
+  - label: Day Length
+    displayType: slider
+    slider:
+      range:
+        - 0
+        - 100
+      step: 1
+      unit: dayLength.unit
+      value: dayLength.value
+      valueType: number
+automation:
+  conditions:
+    - label: Day Length
+      displayType: numberField
+      numberField:
+        value: dayLength.value
+        valueType: number
+        unit: dayLength.unit
+  actions: []
+id: returnamber36996.sunTimes
+version: 1
